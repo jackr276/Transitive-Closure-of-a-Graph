@@ -12,7 +12,7 @@
 
 
 void print_matrix(short** adjacency_matrix, int num_vertices){
-	printf("* ");
+	printf("\t* ");
 	//Print out the top row, which are vertex labels
 	for(int i = 0; i < num_vertices; i++){
 		printf("%d ", i + 1);
@@ -23,7 +23,7 @@ void print_matrix(short** adjacency_matrix, int num_vertices){
 	//Now we can print out what we actually have in the matrix
 	for(int i = 0; i < num_vertices; i++){
 		//Print out the column labels
-		printf("%d ", i + 1);
+		printf("\t%d ", i + 1);
 		for(int j = 0; j < num_vertices; j++){
 			printf("%d ", adjacency_matrix[i][j]);	
 		}
@@ -56,7 +56,7 @@ void teardown_adjacency_matrix(short** adjacency_matrix, int num_vertices){
 }
 
 
-void parse_and_input_line(std::string line, short** adjacency_matrix){
+void parse_and_input_line(std::string line, short** adjacency_matrix, int num_vertices){
 	if(line == "" || line == "d") return;
 	//Grab a stringstream of the input
 	std::stringstream input(line);
@@ -66,8 +66,15 @@ void parse_and_input_line(std::string line, short** adjacency_matrix){
 
 	//The first char should be the 'from' vertex 
 	input.get(ch);
-	
+
+	//Convert this into a number
 	from_vertex = ch - '0';
+
+	//Error handling for the from vertex
+	if(from_vertex > num_vertices || from_vertex < 0){
+		std::cerr << "Error: Vertex " << from_vertex << " is invalid and will not be entered" << std::endl;
+		exit(1);
+	}
 
 	//Skip whitespace
 	input >> std::ws;
@@ -75,6 +82,12 @@ void parse_and_input_line(std::string line, short** adjacency_matrix){
 	input.get(ch);
 
 	to_vertex = ch - '0';
+
+	//Error handling for the to vertex
+	if(to_vertex > num_vertices || to_vertex < 0){
+		std::cerr << "Error: Vertex " << to_vertex<< " is invalid and will not be entered" << std::endl;
+		exit(1);
+	}
 
 	//Populate the adjacency_matrix
 	adjacency_matrix[from_vertex - 1][to_vertex - 1] = 1;	
@@ -103,16 +116,13 @@ int main(void){
 	//Store our input here
 	std::string input = "";
 
-	//We also don't want to overflow
-	int entered_so_far = 0;
-
 	//Keep grabbing input for the adjacency list
 	while(input != "d" && input != "D"){
 		std::getline(std::cin, input);
-		parse_and_input_line(input, input_graph);		
+		parse_and_input_line(input, input_graph, num_vertices);		
 	} 
 
-	printf("You entered a graph described by the adjacency matrix below\n");
+	printf("You entered a graph described by the adjacency matrix below:\n");
 	print_matrix(input_graph, num_vertices);
 
 	//Let the environment know all went well
