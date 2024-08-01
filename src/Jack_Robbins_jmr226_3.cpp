@@ -77,7 +77,7 @@ void parse_and_input_line(std::string line, short** adjacency_matrix){
 	to_vertex = ch - '0';
 
 	//Populate the adjacency_matrix
-	adjacency_matrix[to_vertex - 1][from_vertex - 1] = 1;	
+	adjacency_matrix[from_vertex - 1][to_vertex - 1] = 1;	
 	
 }
 
