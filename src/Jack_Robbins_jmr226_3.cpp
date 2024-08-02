@@ -11,6 +11,11 @@
 #include <string>
 
 
+short** transitive_closure(short** adjacency_matrix, int num_vertices){
+
+}
+
+
 void print_matrix(short** adjacency_matrix, int num_vertices){
 	printf("\t* ");
 	//Print out the top row, which are vertex labels
@@ -47,17 +52,30 @@ short** create_adjacency_matrix(int num_vertices){
 }
 
 
+/**
+ * This function frees the memory from an adjacency matrix properly
+ */
 void teardown_adjacency_matrix(short** adjacency_matrix, int num_vertices){
+	//Free each individual row pointer
 	for(int i = 0; i < num_vertices; i++){
 		free(adjacency_matrix[i]);
 	}
 
+	//Free the overall pointer
 	free(adjacency_matrix);
 }
 
 
+/**
+ * This function will parse the input lines taken from the user and load them into the adjacency matrix
+ * accordingly
+ */
 void parse_and_input_line(std::string line, short** adjacency_matrix, int num_vertices){
-	if(line == "" || line == "d") return;
+	//Remove bad inputs
+	if(line == "" || line == "d"){
+		return;
+	}
+
 	//Grab a stringstream of the input
 	std::stringstream input(line);
 	
@@ -95,6 +113,10 @@ void parse_and_input_line(std::string line, short** adjacency_matrix, int num_ve
 }
 
 
+/**
+ * The main function takes in user input and parses it into the adjacency matrix as the user inputs values.
+ * Any command line arguments will be disregarded entirely
+ */
 int main(void){
 	//Grab the number of nodes the user would like to have
 	int num_vertices;
@@ -122,6 +144,7 @@ int main(void){
 		parse_and_input_line(input, input_graph, num_vertices);		
 	} 
 
+	//Show the user what they've entered
 	printf("You entered a graph described by the adjacency matrix below:\n");
 	print_matrix(input_graph, num_vertices);
 
