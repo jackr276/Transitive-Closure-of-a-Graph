@@ -15,7 +15,7 @@
  * Takes in and displays in a nice format an adjacnecy matrix of dimensions
  * num_vertices x num_vertices
  */
-void print_matrix(short** adjacency_matrix, int num_vertices){
+void print_matrix(short** reachability_matrix, int num_vertices){
 	printf("\t* ");
 	//Print out the top row, which are vertex labels
 	for(int i = 0; i < num_vertices; i++){
@@ -29,7 +29,7 @@ void print_matrix(short** adjacency_matrix, int num_vertices){
 		//Print out the column labels
 		printf("\t%d ", i + 1);
 		for(int j = 0; j < num_vertices; j++){
-			printf("%d ", adjacency_matrix[i][j]);	
+			printf("%d ", reachability_matrix[i][j]);	
 		}
 		printf("\n");
 	}
@@ -42,37 +42,37 @@ void print_matrix(short** adjacency_matrix, int num_vertices){
  * Dynamically allocates and returns a reference to an adjacency matrix of dimensions
  * num_vertices x num_vertices
  */
-short** create_adjacency_matrix(int num_vertices){
+short** create_reachability_matrix(int num_vertices){
 	//Once we know that the input is good, we can define our adjacency matrix
-	short** adjacency_matrix = (short**)malloc(sizeof(short*) * num_vertices);
+	short** reachability_matrix = (short**)malloc(sizeof(short*) * num_vertices);
 
 	//Reserve space for each row in the matrix
 	for(int i = 0; i < num_vertices; i++){
-		adjacency_matrix[i] = (short*)calloc(num_vertices, sizeof(short));
+		reachability_matrix[i] = (short*)calloc(num_vertices, sizeof(short));
 	}
 
 	//Since this is a reachablility matrix, every single element on the diagonal should be 1, because every
 	//node can reach itself
 //	for(int i = 0; i < num_vertices; i++){
-//		adjacency_matrix[i][i] = 1;
+//		reachability_matrix[i][i] = 1;
 //	}
 
 	//Give the pointer back to the caller
-	return adjacency_matrix;
+	return reachability_matrix;
 }
 
 
 /**
  * This function frees the memory from an adjacency matrix properly
  */
-void teardown_adjacency_matrix(short** adjacency_matrix, int num_vertices){
+void teardown_adjacency_matrix(short** reachability_matrix, int num_vertices){
 	//Free each individual row pointer
 	for(int i = 0; i < num_vertices; i++){
-		free(adjacency_matrix[i]);
+		free(reachability_matrix[i]);
 	}
 
 	//Free the overall pointer
-	free(adjacency_matrix);
+	free(reachability_matrix);
 }
 
 
@@ -80,7 +80,7 @@ void teardown_adjacency_matrix(short** adjacency_matrix, int num_vertices){
  * This function will parse the input lines taken from the user and load them into the adjacency matrix
  * accordingly
  */
-void parse_and_input_line(std::string line, short** adjacency_matrix, int num_vertices){
+void parse_and_input_line(std::string line, short** reachability_matrix, int num_vertices){
 	//Remove bad inputs
 	if(line == "" || line == "d"){
 		return;
@@ -117,24 +117,23 @@ void parse_and_input_line(std::string line, short** adjacency_matrix, int num_ve
 		exit(1);
 	}
 
-	//Populate the adjacency_matrix
-	adjacency_matrix[from_vertex - 1][to_vertex - 1] = 1;	
+	//Populate the reachablility matrix 
+	reachability_matrix[from_vertex - 1][to_vertex - 1] = 1;	
 	
 }
 
 
-short** transitive_closure(short** adjacency_matrix, int num_vertices){
-	short** transitive_closure = create_adjacency_matrix(num_vertices);
+short** transitive_closure(short** reachability_matrix, int num_vertices){
+	short** transitive_closure = create_reachability_matrix(num_vertices);
 
 	//We'll just do a quick copy of what we were given into what will eventually become our transitive_closure
 	for(int i = 0; i < num_vertices; i++){
 		for(int j = 0; j < num_vertices; j++){
-			transitive_closure[i][j] = adjacency_matrix[i][j];
+			transitive_closure[i][j] = reachability_matrix[i][j];
 		}
 	}
 
-	for(int k = 1; k < num_vertices; k++){
-	
+	for(int k = 0; k < num_vertices; k++){	
 		for(int i = 0; i < num_vertices; i++){
 			for(int j = 0; j < num_vertices; j++){
 				transitive_closure[i][j] = transitive_closure[i][j] ||
@@ -168,7 +167,7 @@ int main(void){
 	}
 
 	//Initialize a matrix for us
-	short** input_graph = create_adjacency_matrix(num_vertices);
+	short** input_graph = create_reachability_matrix(num_vertices);
 
 	//We now need to construct the adjacency matrix based on what the user puts in
 	std::cout << "Enter the adjacency list for the graph that you desire to use. When done entering, enter <d>" << std::endl;
