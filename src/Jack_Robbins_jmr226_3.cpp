@@ -5,7 +5,6 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
 #include <iostream>
 #include <ostream>
 #include <sstream>
@@ -50,6 +49,12 @@ short** create_adjacency_matrix(int num_vertices){
 	//Reserve space for each row in the matrix
 	for(int i = 0; i < num_vertices; i++){
 		adjacency_matrix[i] = (short*)calloc(num_vertices, sizeof(short));
+	}
+
+	//Since this is a reachablility matrix, every single element on the diagonal should be 1, because every
+	//node can reach itself
+	for(int i = 0; i < num_vertices; i++){
+		adjacency_matrix[i][i] = 1;
 	}
 
 	//Give the pointer back to the caller
@@ -132,12 +137,13 @@ short** transitive_closure(short** adjacency_matrix, int num_vertices){
 	
 		for(int i = 0; i < num_vertices; i++){
 			for(int j = 0; j < num_vertices; j++){
-				transitive_closure[i][j] = transitive_closure[i][j] || transitive_closure[i][k] && transitive_closure[k][j];
+				transitive_closure[i][j] = transitive_closure[i][j] ||
+										   (transitive_closure[i][k] && transitive_closure[k][j]);
 			}
 		}
 
 		//Show the user what we have so far
-		printf("G%d:\n", k);
+		printf("G%d:\n", k + 1);
 		print_matrix(transitive_closure, num_vertices);
 	}	
 
@@ -183,6 +189,8 @@ int main(void){
 	printf("Now finding the transitive closure, G+, of the graph that was inputted\n");
 	short** tran_closure = transitive_closure(input_graph, num_vertices);
 
+	printf("The transitive closure of the input graph, G+, is:\n");
+	print_matrix(tran_closure, num_vertices);
 
 	//Let the environment know all went well
 	return 0;
