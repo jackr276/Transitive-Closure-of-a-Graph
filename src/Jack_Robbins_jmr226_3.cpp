@@ -53,9 +53,9 @@ short** create_adjacency_matrix(int num_vertices){
 
 	//Since this is a reachablility matrix, every single element on the diagonal should be 1, because every
 	//node can reach itself
-	for(int i = 0; i < num_vertices; i++){
-		adjacency_matrix[i][i] = 1;
-	}
+//	for(int i = 0; i < num_vertices; i++){
+//		adjacency_matrix[i][i] = 1;
+//	}
 
 	//Give the pointer back to the caller
 	return adjacency_matrix;
@@ -133,7 +133,7 @@ short** transitive_closure(short** adjacency_matrix, int num_vertices){
 		}
 	}
 
-	for(int k = 0; k < num_vertices; k++){
+	for(int k = 1; k < num_vertices; k++){
 	
 		for(int i = 0; i < num_vertices; i++){
 			for(int j = 0; j < num_vertices; j++){
