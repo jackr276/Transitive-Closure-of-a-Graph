@@ -1,0 +1,24 @@
+Author: Jack Robbins, jmr226
+CS-610, SU 24 Programming Assignment 3
+Explanations File
+
+
+This program takes in user input about the reachability of a graph and will return the transitive closure of
+the graph. 
+
+To run this program, I recommend using the clang++ program as opposed to clang. If your macbook has clang installed,
+odds are it has clang++ too, but I've included instructions for both just in case.
+
+Instructions:
+
+Download and unzip the file into the directory of your choice. "cd" into that directoy and use one of these two options:
+
+Option 1: Using clang++(preferrred option):
+	clang++ Jack_Robbins_jmr226_3.cpp -o run
+	./run
+
+Option 2: Using clang:
+	clang -lstdc++ Jack_Robbins_jmr226_3.cpp -o run
+	./run
+
+

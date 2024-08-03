@@ -53,9 +53,9 @@ short** create_reachability_matrix(int num_vertices){
 
 	//Since this is a reachablility matrix, every single element on the diagonal should be 1, because every
 	//node can reach itself
-//	for(int i = 0; i < num_vertices; i++){
-//		reachability_matrix[i][i] = 1;
-//	}
+	for(int i = 0; i < num_vertices; i++){
+		reachability_matrix[i][i] = 1;
+	}
 
 	//Give the pointer back to the caller
 	return reachability_matrix;
@@ -107,8 +107,10 @@ void parse_and_input_line(std::string line, short** reachability_matrix, int num
 	//Skip whitespace
 	input >> std::ws;
 
+	//Grab the next character
 	input.get(ch);
 
+	//Convert this to a number
 	to_vertex = ch - '0';
 
 	//Error handling for the to vertex
@@ -182,10 +184,10 @@ int main(void){
 	} 
 
 	//Show the user what they've entered
-	printf("You entered a graph described by the adjacency matrix below:\n");
+	printf("\nYou entered a graph described by the reachability matrix below:\n");
 	print_matrix(input_graph, num_vertices);
 
-	printf("Now finding the transitive closure, G+, of the graph that was inputted\n");
+	printf("Now finding the transitive closure, G+, of the graph that was inputted\n\n");
 	short** tran_closure = transitive_closure(input_graph, num_vertices);
 
 	printf("The transitive closure of the input graph, G+, is:\n");
