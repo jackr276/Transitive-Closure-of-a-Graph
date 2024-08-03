@@ -21,4 +21,23 @@ Option 2: Using clang:
 	clang -lstdc++ Jack_Robbins_jmr226_3.cpp -o run
 	./run
 
+Using the program:
 
+To explain, I will show you exactly how to run the program with the "Graph 1: Equivalence Relation" test data.
+When you first run the program, you will be prompted to enter the number of vertices in the graph.
+
+>	Enter the number of vertices in the graph: 6 <Enter>
+
+You will then be told to enter in the adjacency list, as shown in the screen, hitting enter after each input.
+When done entering, type in "d" and hit enter to leave the input mode
+
+>	Enter the adjacency list for the graph that you desire to use. When done entering, enter <d>		
+	1 2<Enter>
+	2 3<Enter>
+	3 1<Enter>
+	4 5<Enter>
+	5 6<Enter>
+	6 4<Enter>
+	d<Enter>
+
+Following this, the program will run and display the reachability at the end.

@@ -8,7 +8,6 @@
 #include <iostream>
 #include <ostream>
 #include <sstream>
-#include <string>
 
 
 /**
@@ -115,7 +114,7 @@ void parse_and_input_line(std::string line, short** reachability_matrix, int num
 
 	//Error handling for the to vertex
 	if(to_vertex > num_vertices || to_vertex < 0){
-		std::cerr << "Error: Vertex " << to_vertex<< " is invalid and will not be entered" << std::endl;
+		std::cerr << "Error: Vertex " << to_vertex << " is invalid and will not be entered" << std::endl;
 		exit(1);
 	}
 
