@@ -40,4 +40,4 @@ When done entering, type in "d" and hit enter to leave the input mode
 	6 4<Enter>
 	d<Enter>
 
-Following this, the program will run and display the reachability at the end.
+Following this, the program will run and display the transitive closure at the end.

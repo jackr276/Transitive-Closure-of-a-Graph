@@ -154,7 +154,7 @@ short** transitive_closure(short** reachability_matrix, int num_vertices){
 		}
 
 		//Show the user what we have so far
-		printf("G%d:\n", k + 1);
+		printf("G%d: All paths of length %d or less accounted for\n", k + 1, k + 1);
 		print_matrix(transitive_closure, num_vertices);
 	}	
 
