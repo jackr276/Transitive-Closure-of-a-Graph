@@ -125,7 +125,13 @@ void parse_and_input_line(std::string line, short** reachability_matrix, int num
 }
 
 
+/**
+ * This function calculates the transitive closure of a graph initially
+ * descriped by a reachability matrix. The transitive closure calculates
+ * the reachability of all nodes in a graph
+ */
 short** transitive_closure(short** reachability_matrix, int num_vertices){
+	//Initialize a matrix for us here
 	short** transitive_closure = create_reachability_matrix(num_vertices);
 
 	//We'll just do a quick copy of what we were given into what will eventually become our transitive_closure
@@ -135,9 +141,14 @@ short** transitive_closure(short** reachability_matrix, int num_vertices){
 		}
 	}
 
+	//Go through all vertices K
 	for(int k = 0; k < num_vertices; k++){	
+		//Go through all "source" vertices one by one
 		for(int i = 0; i < num_vertices; i++){
+			//Go through all "destination" vertices one by one
 			for(int j = 0; j < num_vertices; j++){
+				//If vertex K is is on the path from i to j, then we mark transitive_closure[i][j] as 1 because
+				//it can be reached via i and j
 				transitive_closure[i][j] = transitive_closure[i][j] ||
 										   (transitive_closure[i][k] && transitive_closure[k][j]);
 			}
@@ -148,6 +159,7 @@ short** transitive_closure(short** reachability_matrix, int num_vertices){
 		print_matrix(transitive_closure, num_vertices);
 	}	
 
+	//We'll give this back as a pointer
 	return transitive_closure;
 }
 
@@ -190,6 +202,7 @@ int main(void){
 	printf("Now finding the transitive closure, G+, of the graph that was inputted\n\n");
 	short** tran_closure = transitive_closure(input_graph, num_vertices);
 
+	//Display the final transitive closure reachability matrix
 	printf("The transitive closure of the input graph, G+, is:\n");
 	print_matrix(tran_closure, num_vertices);
 
