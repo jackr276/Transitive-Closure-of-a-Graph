@@ -10,14 +10,9 @@ use std::io::Write;
 /**
  * Parse and interpret a line of text that represents reachability, entered by a user
  */
-fn parse_and_interpret(input: String){
+fn parse_and_interpret(input: String, num_vertices: i8){
 
 }
-
-
-
-
-
 
 
 /**
@@ -25,8 +20,6 @@ fn parse_and_interpret(input: String){
  * input
  */
 fn main() {
-    //The number of vertices in our graph
-    let num_vertices: i8;
   
     //We need a place to store our user's input
     let mut user_input = String::new();
@@ -40,9 +33,10 @@ fn main() {
     //Grab what the user wrote
     std::io::stdin().read_line(&mut user_input).expect("String entered improperly");
 
-    println!("{}", user_input);
+    //Convert to an int, the unwrap will cause a panic if it is bad
+    let num_vertices: i8 = user_input.trim().parse().unwrap();
 
 
-
-
+    //Now get the user input line by line for the edge graph
+    println!("Enter the edge list for the graph. When done, enter <d>")
 }
