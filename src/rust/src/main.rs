@@ -10,7 +10,12 @@ use std::io::Write;
 /**
  * Parse and interpret a line of text that represents reachability, entered by a user
  */
-fn parse_and_interpret(input: &String, num_vertices: i8){
+fn parse_and_interpret(input: &String, num_vertices: i8, reachability_matrix: &mut Vec<Vec<i32>>){
+
+}
+
+
+fn transitive_closure(){
 
 }
 
@@ -40,19 +45,21 @@ fn main() {
             1
         }
     };
-
+ 
+    //Declare our reachability matrix now that we know how many vertices that there are
+    let mut reachability_matrix = vec![vec![0; num_vertices.try_into().unwrap()]; num_vertices.try_into().unwrap()]; 
     //Now get the user input line by line for the edge graph
     println!("Enter the edge list for the graph. When done, enter <d>");
     
     //So long as the input isn't "d", we'll keep parsing
     while !user_input.trim().eq(&String::from("d")) {      
+        //Wipe whatever was previously in here
         user_input.clear();
+        //Grab the line
         std::io::stdin().read_line(&mut user_input).expect("String entered improperly");
 
         //Parse and interpret the line into our reachability matrix
-        parse_and_interpret(&user_input, num_vertices)
-
+        parse_and_interpret(&user_input, num_vertices, &mut reachability_matrix)
     }
-    
 
 }
