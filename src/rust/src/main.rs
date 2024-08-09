@@ -15,8 +15,18 @@ fn parse_and_interpret(input: &String, num_vertices: i8, reachability_matrix: &m
 }
 
 
-fn transitive_closure(){
+fn transitive_closure(num_vertices: i32, reachability_matrix: &mut Vec<Vec<i32>>){
+    //Grab an exact copy of the reachability matrix passed in to us 
+    let mut transitive_closure= reachability_matrix.clone(); 
 
+    for k in 0..num_vertices{ 
+        for i in 0..num_vertices{  
+            for j in 0..num_vertices{
+                transitive_closure[i][j] = transitive_closure[i][j] ||  
+                                            (transitive_closure[i][k] && transitive_closure)
+            }
+        }
+    }
 }
 
 
@@ -62,4 +72,5 @@ fn main() {
         parse_and_interpret(&user_input, num_vertices, &mut reachability_matrix)
     }
 
+    transitive_closure(num_vertices.try_into().unwrap(), &mut reachability_matrix);
 }
