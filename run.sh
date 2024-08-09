@@ -10,6 +10,6 @@ fi
 #Clean out the compiled directory
 rm -r out/*
 
-g++ -Wall -Wextra ./src/cpp/transitive_closure.cpp -o ./out/transitive_closure
+g++ -Wall -Wextra ./src/transitive_closure.cpp -o ./out/transitive_closure
 
 ./out/transitive_closure
