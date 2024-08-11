@@ -39,3 +39,75 @@ for(int k = 0; k < num_vertices; k++){
 In our adaptation here, we remove the storage of shortest distances because they are irrelevant to our transitive closure. Instead, we simply store 0 or 1 and use the binary `&&` and `||` operators to assign the matrix value to be 0 or 1 based on if we find a path that contains vertex `k` as an intermediary vertex between `i` and `j`. It is simple to see that this algorithm runs in $O$($V^3$) time, due to the triple for loop. Though this is not the best time complexity, it is acceptable for small graphs.   
 
 ## Running this program
+To run this program for yourself, first clone the repository and `cd` into the location on your local machine. A simple runner script, [run.sh](https://github.com/jackr276/Transitive-Closure-of-a-Graph/blob/main/run.sh) is provided for convenience. We use to run the program in this way:
+```console
+example@bash: ~/Transitive-Closure-of-a-Graph $ chmod +x run.sh
+example@bash: ~/Transitive-Closure-of-a-Graph $ ./run.sh
+Enter the number of vertices in the graph: 5
+Enter the adjacency list for the graph that you desire to use. When done entering, enter <d>
+2 3
+4 5
+1 2
+2 1
+d
+
+You entered a graph described by the reachability matrix below:
+	* 1 2 3 4 5 
+	1 1 1 0 0 0 
+	2 1 1 1 0 0 
+	3 0 0 1 0 0 
+	4 0 0 0 1 1 
+	5 0 0 0 0 1 
+
+Now finding the transitive closure, G+, of the graph that was inputted
+
+G1: All paths of length 1 or less accounted for
+	* 1 2 3 4 5 
+	1 1 1 0 0 0 
+	2 1 1 1 0 0 
+	3 0 0 1 0 0 
+	4 0 0 0 1 1 
+	5 0 0 0 0 1 
+
+G2: All paths of length 2 or less accounted for
+	* 1 2 3 4 5 
+	1 1 1 1 0 0 
+	2 1 1 1 0 0 
+	3 0 0 1 0 0 
+	4 0 0 0 1 1 
+	5 0 0 0 0 1 
+
+G3: All paths of length 3 or less accounted for
+	* 1 2 3 4 5 
+	1 1 1 1 0 0 
+	2 1 1 1 0 0 
+	3 0 0 1 0 0 
+	4 0 0 0 1 1 
+	5 0 0 0 0 1 
+
+G4: All paths of length 4 or less accounted for
+	* 1 2 3 4 5 
+	1 1 1 1 0 0 
+	2 1 1 1 0 0 
+	3 0 0 1 0 0 
+	4 0 0 0 1 1 
+	5 0 0 0 0 1 
+
+G5: All paths of length 5 or less accounted for
+	* 1 2 3 4 5 
+	1 1 1 1 0 0 
+	2 1 1 1 0 0 
+	3 0 0 1 0 0 
+	4 0 0 0 1 1 
+	5 0 0 0 0 1 
+
+The transitive closure of the input graph, G+, is:
+	* 1 2 3 4 5 
+	1 1 1 1 0 0 
+	2 1 1 1 0 0 
+	3 0 0 1 0 0 
+	4 0 0 0 1 1 
+	5 0 0 0 0 1 
+
+example@bash: ~/Transitive-Closure-of-a-Graph $
+```
